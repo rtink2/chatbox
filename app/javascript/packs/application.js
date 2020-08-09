@@ -16,4 +16,29 @@ require("semantic-ui-sass")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-import "bootstrap"
+import "bootstrap";
+
+/*global $ */
+
+var scroll_bottom = function() {
+  if ($('#chats').length > 0) {
+    $('#chats').scrollTop($('#chats')[0].scrollHeight);
+  }
+};
+
+var submit_message = function() {
+  $('#chat_body').on('keydown', function(e) {
+    if (e.keyCode == 13) {
+      $('button').click();
+      e.target.value = "";
+    }
+  });
+};
+
+$(document).on('turbolinks:load', function() {
+  $('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade');
+  });
+  submit_message();
+  scroll_bottom();
+})

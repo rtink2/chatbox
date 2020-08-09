@@ -18,15 +18,18 @@
             Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Log out</a>
-            <%= link_to "Log in", login_path, class: "dropdown-item" %>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Sign up</a>
+            <% if logged_in? %>
+              <%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item' %>
+            <% else %>
+              <%= link_to "Log in", login_path, class: "dropdown-item" %>
+            <% end %>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sign Up</a>
-        </li>
+        <% if !logged_in? %>
+          <li class="nav-item ml-3">
+            <%= link_to 'Log in', login_path, class: 'ui primary button' %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

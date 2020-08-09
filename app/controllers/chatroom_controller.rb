@@ -1,7 +1,9 @@
 class ChatroomController < ApplicationController
+    before_action :require_user
     
     def index
-        @chats = Chat.all
+        @chat = Chat.new
+        @chats = Chat.custom_display
     end
     
 end
